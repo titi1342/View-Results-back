@@ -11,13 +11,15 @@ const PORT = 5000;
 
 // 🔐 Mot de passe hashé (pour "supersecret123")
 const hashedPassword = "$2b$10$.IkG7vYovc1wNkG.PG5PV.WvAto66LnAX1Tf591aep6Gsfd240QfC";
+const hashedUsername = "randevteam03";
 
 // ✅ Route de vérification du mot de passe
 app.post('/check-password', async (req, res) => {
-  const { password } = req.body;
+  const { user, password } = req.body;
   try {
     const isMatch = await bcrypt.compare(password, hashedPassword);
-    if (isMatch) {
+    const isUserMatch = await bcrypt.compare(user, hashedUsername);
+    if (isMatch && isUserMatch) {
       res.json({ success: true });
     } else {
       res.status(401).json({ success: false, message: 'Mot de passe incorrect' });
