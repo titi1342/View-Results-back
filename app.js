@@ -10,15 +10,15 @@ app.use(express.json()); // pour parser les requêtes POST en JSON
 const PORT = 5000;
 
 // 🔐 Mot de passe hashé (pour "supersecret123")
-const hashedPassword = "$2b$10$.IkG7vYovc1wNkG.PG5PV.WvAto66LnAX1Tf591aep6Gsfd240QfC";
-const hashedUsername = "randevteam2025";
+const hashedPassword = "$2b$10$osgV6FzW2JQxhrAEPpszIusbBI7xVBb74cDfztRyMb3zCA9Q7HP1i";
+const hashedUsername = "$2b$10$CwTC8/5uXXnxgUxMoRLAf.p6a8A1oebefO0GTSS9LLbSduhBAC9J2";
 
 // ✅ Route de vérification du mot de passe
 app.post('/check-password', async (req, res) => {
   const { user, password } = req.body;
   try {
     const isMatch = await bcrypt.compare(password, hashedPassword);
-    const isUserMatch = user === hashedUsername;
+    const isUserMatch = await bcrypt.compare(user, hashedUsername);
     if (isMatch && isUserMatch) {
       res.json({ success: true });
     } else {
