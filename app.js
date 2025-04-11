@@ -18,7 +18,7 @@ app.post('/check-password', async (req, res) => {
   const { user, password } = req.body;
   try {
     const isMatch = await bcrypt.compare(password, hashedPassword);
-    const isUserMatch = await bcrypt.compare(user, hashedUsername);
+    const isUserMatch = user === hashedUsername;
     if (isMatch && isUserMatch) {
       res.json({ success: true });
     } else {
