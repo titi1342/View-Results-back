@@ -11,7 +11,7 @@ const PORT = 5000;
 
 // 🔐 Mot de passe hashé (pour "supersecret123")
 const hashedPassword = "$2b$10$.IkG7vYovc1wNkG.PG5PV.WvAto66LnAX1Tf591aep6Gsfd240QfC";
-const hashedUsername = "randevteam03";
+const hashedUsername = "randevteam2025";
 
 // ✅ Route de vérification du mot de passe
 app.post('/check-password', async (req, res) => {
